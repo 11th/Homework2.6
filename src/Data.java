@@ -1,0 +1,21 @@
+public class Data {
+    public static boolean check(String login, String password, String confirmPassword) throws WrongLoginException, WrongPasswordException{
+        if (!checkWord(login)){
+            throw new WrongLoginException("Некорректный логин");
+        } else if (!checkWord(password)){
+            throw new WrongPasswordException("Некорректный пароль");
+        } else if (!password.equals(confirmPassword)){
+            throw new WrongPasswordException("Пароли не совпадают");
+        }
+        return true;
+    }
+
+    private static boolean checkWord(String word) {
+        if (word.isBlank() || word.length() < 1 || word.length() > 20){
+            return false;
+        } else if (!word.matches("^[a-zA-Z0-9_]*$")){
+            return false;
+        }
+        return true;
+    }
+}
